@@ -1,38 +1,112 @@
-.App {
+.feedback-form-container {
+  width: 350px;
+  margin: 20px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo {
+  max-width: 100px;
+  margin-bottom: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h2 {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #e74c3c;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+select,
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s;
+}
+
+select:focus,
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #e74c3c;
+  outline: none;
+}
+
+.stars {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 5px;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 30px;
+  transition: color 0.3s;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.radio-group {
+  display: flex;
+  gap: 30px;
+  margin: 15px 0;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+.checkbox-group {
+  margin: 15px 0;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e74c3c;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+.submit-button:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submit-button:active {
+  transform: translateY(0);
 }
