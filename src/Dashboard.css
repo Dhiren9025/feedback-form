@@ -1,0 +1,57 @@
+.dashboard-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    color: #000000; /* Title color */
+    margin-bottom: 20px;
+    font-size: 28px; /* Title font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .feedback-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+  }
+  
+  .feedback-heading {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .empty-state {
+    text-align: center;
+    color: gray;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .fill {
+    color: red;
+  }
+  .clear-feedback-button {
+    margin: 20px 0; /* Add spacing around the button */
+    padding: 10px 20px; /* Add padding for a better look */
+    background-color: red; /* Red background for clear action */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  .clear-feedback-button:hover {
+    background-color: rgb(31, 5, 5); /* Darker red on hover */
+  }
+  

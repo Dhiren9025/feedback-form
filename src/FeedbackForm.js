@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import './FeedbackForm.css';
-import image from './assets/image.png'
-
 
 const FeedbackForm = () => {
   const [feedback, setFeedback] = useState({
@@ -14,6 +12,18 @@ const FeedbackForm = () => {
     followUp: false,
   });
 
+  const [error, setError] = useState('');
+
+  // Clear local storage after the first refresh
+  useEffect(() => {
+    const firstLoad = localStorage.getItem('firstLoad');
+
+    if (!firstLoad) {
+      localStorage.clear(); // Clear local storage
+      localStorage.setItem('firstLoad', 'true'); // Set flag for first load
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFeedback({
@@ -24,19 +34,63 @@ const FeedbackForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(feedback);
-    alert('Feedback submitted!');
+    if (validateForm()) {
+      const existingData = localStorage.getItem('feedbackData');
+      let updatedFeedback;
+  
+      console.log("Existing Data from localStorage:", existingData); // Log existing data
+  
+      // Check if existingData is null
+      if (existingData) {
+        try {
+          updatedFeedback = [...JSON.parse(existingData), feedback];
+        } catch (error) {
+          console.error("Error parsing JSON from localStorage:", error);
+          alert("There was an error saving your feedback. Please try again.");
+          return;
+        }
+      } else {
+        updatedFeedback = [feedback]; // No existing data
+      }
+  
+      localStorage.setItem('feedbackData', JSON.stringify(updatedFeedback));
+      console.log(feedback);
+      alert('Feedback submitted!');
+      
+      // Clear the form after submission
+      setFeedback({
+        visitFrequency: '',
+        foodQuality: 0,
+        serviceQuality: 0,
+        overallExperience: 0,
+        recommend: '',
+        suggestions: '',
+        followUp: false,
+      });
+      window.location.href = '/dashboard';
+    }
+  };
+  
+  const validateForm = () => {
+    if (!feedback.visitFrequency || !feedback.recommend || !feedback.suggestions) {
+      setError('Please fill out all required fields.');
+      console.error('Validation Error: Missing required fields.');
+      return false;
+    }
+    setError(''); // Clear error if validation passes
+    return true;
   };
 
   return (
     <div className="feedback-form-container">
       <form onSubmit={handleSubmit}>
         <div className="header">
-          <img src={image} alt="Paradise Hotel" className="logo" /> 
           <h1>Paradise Hotel</h1>
-          <h2>Hello, Thanks for Visiting!</h2>
-          <p>Please help us improve our cafe services by filling in our feedback form.</p>
+          <h2>Thanks for Visiting!</h2>
+          <p>Please help us improve by filling out our feedback form.</p>
         </div>
+
+        {error && <p className="error">{error}</p>}
 
         <label>How Often Do You Visit Here?</label>
         <select name="visitFrequency" value={feedback.visitFrequency} onChange={handleChange}>
@@ -54,7 +108,9 @@ const FeedbackForm = () => {
                 key={rating}
                 className={feedback.foodQuality >= rating ? 'star selected' : 'star'}
                 onClick={() => setFeedback({ ...feedback, foodQuality: rating })}
-              >★</span>
+              >
+                ★
+              </span>
             ))}
           </div>
 
@@ -65,7 +121,9 @@ const FeedbackForm = () => {
                 key={rating}
                 className={feedback.serviceQuality >= rating ? 'star selected' : 'star'}
                 onClick={() => setFeedback({ ...feedback, serviceQuality: rating })}
-              >★</span>
+              >
+                ★
+              </span>
             ))}
           </div>
 
@@ -76,7 +134,9 @@ const FeedbackForm = () => {
                 key={rating}
                 className={feedback.overallExperience >= rating ? 'star selected' : 'star'}
                 onClick={() => setFeedback({ ...feedback, overallExperience: rating })}
-              >★</span>
+              >
+                ★
+              </span>
             ))}
           </div>
         </div>
@@ -117,7 +177,7 @@ const FeedbackForm = () => {
               name="followUp"
               checked={feedback.followUp}
               onChange={handleChange}
-            /> Receive personal follow-up to your feedback
+            /> Receive personal follow-up
           </label>
         </div>
 

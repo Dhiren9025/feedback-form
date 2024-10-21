@@ -13,10 +13,6 @@
   margin-bottom: 20px;
 }
 
-.logo {
-  max-width: 100px;
-  margin-bottom: 5px;
-}
 
 h1 {
   font-family: sans-serif;
@@ -109,4 +105,16 @@ textarea {
 
 .submit-button:active {
   transform: translateY(0);
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
 }
